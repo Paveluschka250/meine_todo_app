@@ -4,7 +4,55 @@ h1 {
   margin-top: 50px;
 }
 
+h1 {
+  color: #333;
+  text-align: center;
+  margin-top: 50px;
+}
+
 p {
   text-align: center;
   color: #666;
+}
+
+.todo-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .todo-list {
+    list-style: none;
+    padding: 0;
+
+    .todo-item {
+      background: #f8f9fa;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #007bff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+      }
+
+      span {
+        &.completed {
+          text-decoration: line-through;
+          color: #6c757d;
+        }
+
+        &.status {
+          font-size: 14px;
+          color: #28a745;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
