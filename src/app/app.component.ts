@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'meine_todo_app';
   newTodoText: string = '';
+  currentFilter: 'all' | 'active' | 'completed' = 'all';
 
   todoItems: TodoItem[] = [
     { id: 1, text: 'Angular lernen', completed: false },
@@ -38,6 +39,29 @@ export class AppComponent {
       });
       this.newTodoText = ''; // Input leeren
     }
+  }
+
+  get filteredTodos(): TodoItem[] {
+    switch (this.currentFilter) {
+      case 'active':
+        return this.todoItems.filter((todo) => !todo.completed);
+      case 'completed':
+        return this.todoItems.filter((todo) => todo.completed);
+      default:
+        return this.todoItems;
+    }
+  }
+
+  getActiveTodosCount(): number {
+    return this.todoItems.filter((todo) => !todo.completed).length;
+  }
+
+  getCompletedTodosCount(): number {
+    return this.todoItems.filter((todo) => todo.completed).length;
+  }
+
+  setFilter(filter: 'all' | 'active' | 'completed'): void {
+    this.currentFilter = filter;
   }
 }
 
