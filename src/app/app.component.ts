@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'meine_todo_app';
+  newTodoText: string = '';
 
   todoItems: TodoItem[] = [
     { id: 1, text: 'Angular lernen', completed: false },
@@ -25,6 +26,18 @@ export class AppComponent {
 
   deleteTodo(id: number): void {
     this.todoItems = this.todoItems.filter((item) => item.id !== id);
+  }
+
+  addTodo(): void {
+    if (this.newTodoText.trim()) {
+      const newId = Math.max(...this.todoItems.map((item) => item.id)) + 1;
+      this.todoItems.push({
+        id: newId,
+        text: this.newTodoText.trim(),
+        completed: false,
+      });
+      this.newTodoText = ''; // Input leeren
+    }
   }
 }
 

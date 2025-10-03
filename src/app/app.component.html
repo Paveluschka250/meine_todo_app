@@ -1,5 +1,25 @@
 <h1>Meine Todo-Liste</h1>
 
+<div class="add-todo-section">
+  <h2>Neues Todo hinzufügen</h2>
+  <div class="input-group">
+    <input
+      type="text"
+      [(ngModel)]="newTodoText"
+      placeholder="Was möchtest du erledigen?"
+      (keyup.enter)="addTodo()"
+      class="todo-input"
+    />
+    <button
+      (click)="addTodo()"
+      class="add-btn"
+      [disabled]="!newTodoText.trim()"
+    >
+      ➕ Hinzufügen
+    </button>
+  </div>
+</div>
+
 <div class="todo-container">
   <ul class="todo-list">
     <li
@@ -34,3 +54,5 @@
     </li>
   </ul>
 </div>
+
+
