@@ -2,10 +2,22 @@
 
 <div class="todo-container">
   <ul class="todo-list">
-    <li *ngFor="let todo of todoItems" class="todo-item">
-      <span [class.completed]="todo.completed">
-        {{ todo.text }}
-      </span>
+    <li
+      *ngFor="let todo of todoItems"
+      class="todo-item"
+      [class.completed]="todo.completed"
+    >
+      <div class="todo-content">
+        <input
+          type="checkbox"
+          [checked]="todo.completed"
+          (change)="toggleTodo(todo.id)"
+        />
+        <span [class.completed]="todo.completed">
+          {{ todo.text }}
+        </span>
+      </div>
+
       <span class="status">
         {{ todo.completed ? "✓ Erledigt" : "⏳ Offen" }}
       </span>

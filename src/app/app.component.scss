@@ -4,17 +4,6 @@ h1 {
   margin-top: 50px;
 }
 
-h1 {
-  color: #333;
-  text-align: center;
-  margin-top: 50px;
-}
-
-p {
-  text-align: center;
-  color: #666;
-}
-
 .todo-container {
   max-width: 600px;
   margin: 0 auto;
@@ -41,17 +30,67 @@ p {
         transition: all 0.3s ease;
       }
 
-      span {
-        &.completed {
-          text-decoration: line-through;
-          color: #6c757d;
+      &.completed {
+        border-left: 4px solid #28a745;
+      }
+
+      .todo-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+
+        input[type="checkbox"] {
+          appearance: none; 
+          width: 20px;
+          height: 20px;
+          border: 2px solid #007bff;
+          border-radius: 4px;
+          background: white;
+          cursor: pointer;
+          position: relative;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: #0056b3;
+            transform: scale(1.1);
+          }
+
+          &:checked {
+            background: #28a745;
+            border-color: #28a745;
+            
+            // Häkchen-Symbol
+            &::after {
+              content: "✓";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              color: white;
+              font-weight: bold;
+              font-size: 14px;
+            }
+          }
+
+          &:focus {
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+          }
         }
 
-        &.status {
-          font-size: 14px;
-          color: #28a745;
-          font-weight: bold;
+        span {
+          &.completed {
+            text-decoration: line-through;
+            color: #6c757d;
+          }
         }
+      }
+
+      .status {
+        font-size: 14px;
+        color: #28a745;
+        font-weight: bold;
       }
     }
   }
