@@ -21,6 +21,16 @@
       <span class="status">
         {{ todo.completed ? "✓ Erledigt" : "⏳ Offen" }}
       </span>
+
+      <div class="todo-actions">
+        <button
+          class="delete-btn"
+          (click)="deleteTodo(todo.id)"
+          title="Löschen"
+        >
+          🗑️
+        </button>
+      </div>
     </li>
   </ul>
 </div>

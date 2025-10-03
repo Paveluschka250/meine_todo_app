@@ -22,6 +22,10 @@ export class AppComponent {
       todo.completed = !todo.completed;
     }
   }
+
+  deleteTodo(id: number): void {
+    this.todoItems = this.todoItems.filter((item) => item.id !== id);
+  }
 }
 
 interface TodoItem {
