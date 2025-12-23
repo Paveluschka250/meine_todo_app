@@ -1,82 +1,111 @@
-<h1>Meine Todo-Liste</h1>
+<div class="app-container">
+  <header class="app-header">
+    <h1 class="app-title">
+      <span class="title-icon">✓</span>
+      Meine Todo-Liste
+    </h1>
+    <p class="app-subtitle">Organisiere deine Aufgaben effizient</p>
+  </header>
 
-<div class="filter-section">
-  <h3>Filter:</h3>
-  <div class="filter-buttons">
-    <button 
-      class="filter-btn" 
-      [class.active]="currentFilter === 'all'"
-      (click)="setFilter('all')">
-      📋 Alle ({{ todoItems.length }})
-    </button>
-    <button 
-      class="filter-btn" 
-      [class.active]="currentFilter === 'active'"
-      (click)="setFilter('active')">
-      ⏳ Offen ({{ getActiveTodosCount() }})
-    </button>
-    <button 
-      class="filter-btn" 
-      [class.active]="currentFilter === 'completed'"  
-      (click)="setFilter('completed')">
-      ✅ Erledigt ({{ getCompletedTodosCount() }})
-    </button>
-  </div>
-</div>
-
-<div class="add-todo-section">
-  <h2>Neues Todo hinzufügen</h2>
-  <div class="input-group">
-    <input
-      type="text"
-      [(ngModel)]="newTodoText"
-      placeholder="Was möchtest du erledigen?"
-      (keyup.enter)="addTodo()"
-      class="todo-input"
-    />
-    <button
-      (click)="addTodo()"
-      class="add-btn"
-      [disabled]="!newTodoText.trim()"
-    >
-      ➕ Hinzufügen
-    </button>
-  </div>
-</div>
-
-<div class="todo-container">
-  <ul class="todo-list">
-    <li
-      *ngFor="let todo of filteredTodos"
-      class="todo-item"
-      [class.completed]="todo.completed"
-    >
-      <div class="todo-content">
-        <input
-          type="checkbox"
-          [checked]="todo.completed"
-          (change)="toggleTodo(todo.id)"
-        />
-        <span [class.completed]="todo.completed">
-          {{ todo.text }}
-        </span>
-      </div>
-
-      <span class="status">
-        {{ todo.completed ? "✓ Erledigt" : "⏳ Offen" }}
-      </span>
-
-      <div class="todo-actions">
-        <button
-          class="delete-btn"
-          (click)="deleteTodo(todo.id)"
-          title="Löschen"
-        >
-          🗑️
+  <main class="app-main">
+    <section class="filter-section">
+      <h2 class="section-title">Filter</h2>
+      <div class="filter-buttons">
+        <button 
+          class="filter-btn" 
+          [class.active]="currentFilter === 'all'"
+          (click)="setFilter('all')">
+          <span class="filter-icon">📋</span>
+          <span class="filter-text">Alle</span>
+          <span class="filter-count">{{ todoItems.length }}</span>
+        </button>
+        <button 
+          class="filter-btn" 
+          [class.active]="currentFilter === 'active'"
+          (click)="setFilter('active')">
+          <span class="filter-icon">⏳</span>
+          <span class="filter-text">Offen</span>
+          <span class="filter-count">{{ getActiveTodosCount() }}</span>
+        </button>
+        <button 
+          class="filter-btn" 
+          [class.active]="currentFilter === 'completed'"  
+          (click)="setFilter('completed')">
+          <span class="filter-icon">✅</span>
+          <span class="filter-text">Erledigt</span>
+          <span class="filter-count">{{ getCompletedTodosCount() }}</span>
         </button>
       </div>
-    </li>
-  </ul>
+    </section>
+
+    <section class="add-todo-section">
+      <h2 class="section-title">Neues Todo hinzufügen</h2>
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="newTodoText"
+          placeholder="Was möchtest du erledigen?"
+          (keyup.enter)="addTodo()"
+          class="todo-input"
+          aria-label="Todo-Eingabefeld"
+        />
+        <button
+          (click)="addTodo()"
+          class="add-btn"
+          [disabled]="!newTodoText.trim()"
+          aria-label="Todo hinzufügen"
+        >
+          <span class="btn-icon">➕</span>
+          <span class="btn-text">Hinzufügen</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="todo-container">
+      <div *ngIf="filteredTodos.length === 0" class="empty-state">
+        <div class="empty-icon">📝</div>
+        <p class="empty-text">Keine Todos vorhanden</p>
+        <p class="empty-hint">Füge dein erstes Todo hinzu!</p>
+      </div>
+      <ul class="todo-list" *ngIf="filteredTodos.length > 0">
+        <li
+          *ngFor="let todo of filteredTodos"
+          class="todo-item"
+          [class.completed]="todo.completed"
+        >
+          <div class="todo-content">
+            <label class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                [checked]="todo.completed"
+                (change)="toggleTodo(todo.id)"
+                class="todo-checkbox"
+                [attr.aria-label]="'Todo ' + todo.text + ' als erledigt markieren'"
+              />
+              <span class="checkbox-custom"></span>
+            </label>
+            <span class="todo-text" [class.completed]="todo.completed">
+              {{ todo.text }}
+            </span>
+          </div>
+
+          <div class="todo-meta">
+            <span class="status-badge" [class.completed]="todo.completed">
+              {{ todo.completed ? "✓ Erledigt" : "⏳ Offen" }}
+            </span>
+            <button
+              class="delete-btn"
+              (click)="deleteTodo(todo.id)"
+              title="Löschen"
+              aria-label="Todo löschen"
+            >
+              <span class="delete-icon">🗑️</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
 </div>
 
 
