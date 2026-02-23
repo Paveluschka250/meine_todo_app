@@ -5,7 +5,7 @@
 Öffne ein Terminal im Projektordner und führe folgenden Befehl aus:
 
 ```bash
-ng build --configuration production --base-href /projects/meine_todo_app/
+ng build --configuration production --base-href /MyProjects/meine_todo_app/
 ```
 
 Dieser Befehl:
@@ -18,14 +18,14 @@ Dieser Befehl:
 1. **Öffne FileZilla** und verbinde dich mit deinem Server
 
 2. **Navigiere zum Zielordner:**
-   - Gehe zu: `paul-gross-dev.com/projects/`
+   - Gehe zu: `paul-gross-dev.com/MyProjects/`
    - Erstelle dort einen Ordner namens `meine_todo_app` (falls noch nicht vorhanden)
 
 3. **Hochladen der Dateien:**
    - Öffne lokal den Ordner: `dist/meine_todo_app/`
    - **WICHTIG:** Lade ALLE Dateien und Ordner aus diesem Verzeichnis hoch:
      - `index.html`
-     - `favicon.ico`
+     - Ordner `favicon/` (mit allen Favicon-Dateien)
      - Alle `.js` Dateien
      - Alle `.css` Dateien
      - Der `assets` Ordner (falls vorhanden)
@@ -45,14 +45,14 @@ Stelle sicher, dass die Dateien die richtigen Berechtigungen haben:
 
 Öffne im Browser:
 ```
-https://paul-gross-dev.com/projects/meine_todo_app/
+https://paul-gross-dev.com/MyProjects/meine_todo_app/
 ```
 
 Die App sollte jetzt erreichbar sein!
 
 ## Wichtige Hinweise
 
-- **Bei Änderungen:** Führe immer wieder `ng build --configuration production --base-href /projects/meine_todo_app/` aus und lade die neuen Dateien hoch
+- **Bei Änderungen:** Führe `npm run build:prod` aus (oder `ng build --configuration production --base-href /MyProjects/meine_todo_app/`) und lade die neuen Dateien hoch
 - **Cache leeren:** Falls Änderungen nicht sichtbar sind, leere den Browser-Cache (Strg+Shift+R)
 - **Routing:** Die `.htaccess` Datei sorgt dafür, dass das Angular Routing funktioniert
 
@@ -66,4 +66,5 @@ Die App sollte jetzt erreichbar sein!
 - Prüfe, ob alle Dateien hochgeladen wurden
 - Prüfe die Browser-Konsole auf Fehler
 - Stelle sicher, dass die Pfade in der `index.html` korrekt sind
+
 
