@@ -1,11 +1,16 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  
-  # Wenn die angeforderte Datei oder der Ordner nicht existiert, leite zur index.html weiter
+  # Wichtig: Basis-Pfad, wenn diese .htaccess in einem Unterordner liegt (z. B. /MyProjects/meine_todo_app/)
+  RewriteBase /MyProjects/meine_todo_app/
+
+  # Niemals echte Asset-Anfragen auf index.html umleiten (verhindert MIME-Type-Fehler)
+  # Wenn .js/.css fehlt, lieber 404 als HTML zurückgeben
+  RewriteCond %{REQUEST_URI} \.(js|css|ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|json|webmanifest)$ [NC]
+  RewriteRule .* - [L]
+
+  # Nur wenn keine existierende Datei/Ordner: für Angular Routing auf index.html weiterleiten
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  
-  # Leite alle Anfragen an index.html weiter (für Angular Routing)
   RewriteRule ^ index.html [L]
 </IfModule>
 

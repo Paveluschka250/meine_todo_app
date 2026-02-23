@@ -62,9 +62,13 @@ Die App sollte jetzt erreichbar sein!
 - Prüfe, ob die `.htaccess` Datei hochgeladen wurde
 - Prüfe, ob der `base-href` korrekt gesetzt ist
 
-**Problem:** Styles oder Scripts werden nicht geladen
-- Prüfe, ob alle Dateien hochgeladen wurden
-- Prüfe die Browser-Konsole auf Fehler
-- Stelle sicher, dass die Pfade in der `index.html` korrekt sind
+**Problem:** Styles oder Scripts werden nicht geladen / MIME-Type-Fehler („Expected a JavaScript module script but the server responded with text/html“)
+- **Ursache:** Der Server liefert `index.html` statt der angeforderten `.js`/`.css`-Dateien (meist weil die Dateien fehlen oder nicht im gleichen Ordner wie `index.html` liegen).
+- **Lösung:**
+  1. Einen frischen Build ausführen: `npm run build:prod`
+  2. **Alle** Dateien aus `dist/meine_todo_app/` erneut hochladen – **immer gemeinsam**: `index.html` und die genannten `runtime.*.js`, `main.*.js`, `polyfills.*.js`, `styles.*.css` (die genauen Namen stehen in der aktuellen `index.html`).
+  3. Nicht einen alten Build-Ordner mit neuer `index.html` mischen – die Dateinamen mit Hash müssen zusammenpassen.
+  4. Auf dem Server müssen `index.html` und alle `.js`/`.css` **im selben Ordner** liegen (z. B. im Ordner, der unter `/MyProjects/meine_todo_app/` erreichbar ist).
+- Die aktuelle `.htaccess` leitet Anfragen für `.js`/`.css` nicht mehr auf `index.html` um; fehlende Dateien führen dann zu 404 (statt zu einem MIME-Type-Fehler).
 
 
